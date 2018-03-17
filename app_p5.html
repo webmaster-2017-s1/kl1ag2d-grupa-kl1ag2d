@@ -1,51 +1,72 @@
-<!doctype html>
-<html class="no-js" lang="pl">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Projekt [wpisz nazwę]</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!DOCTYPE html>
+<html  lange="en">
+<head>
+    <meta charset="UTF-8"
+    <title>PONG</title>
+    <style>
+        body {
+             margin: 0;
+             padding: 0;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             height: 100vh;
+             background-color: darkgray;
+        }
+        canvas {
+          border: 3px solid #fff
+          }
+    </style>
+</head>
+<body>
 
-    <!-- Umieść favicon.ico w głównym katalogu -->
+    <canvas></canvas>
 
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
-  </head>
-  <body>
-    <!--[if lte IE 9]>
-    <p class="browserupgrade">
-      Używasz <strong>przestarzałej</strong> przeglądarki.
-      Zalecamy <a href="https://browsehappy.com/">aktualizację przeglądarki</a>
-      w celu polepszenia obsługi najnowszych standardów i podniesienia poziomu bezpieczeństwa.</p>
-    <![endif]-->
+    <script>
+        const canvas = document.querySelector('canvas');
+        const ctx = canvas.getContext('2d');
 
-    <!-- Tutaj dodajesz swój kod -->
-    <!-- Tutaj dodajesz swój kod -->
-    <h1>Projekt [wpisz nazwę]</h1>
-    <div>
-      <ul class="menu">
-        <li><a href="index.html">Strona główna</a></li>
-        <li><a href="app_jq.html">Wersja jQuery</a></li>
-        <li><a href="app_p5.html">Wersja p5js</a></li>
-      </ul>
-    </div>
+        canvas.width = 1000;
+        canvas.height = 500;
 
-    <!-- skrypt umożliwiający sprawdzanie możliwośći przeglądarki -->
-    <script src="js/vendor/modernizr-3.5.0.min.js"></script>
-    <!--biblioteka jQuery-->
-    <!--<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>-->
-    <!--jeżeli nie pobrano jQuery z sieci, spróbuj załadować ją z podfolderu js -->
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
-    <script src="js/plugins.js"></script>
-    <!--biblioteka p5js-->
-    <script src="js/vendor/p5.min.js"></script>
-    <script src="js/vendor/p5.dom.min.js"></script>
-    <script src="js/vendor/p5.sound.min.js"></script>
-    <!-- ewentualny kod JS ogólny -->
-    <script src="js/main.js"></script>
-    <!--kod aplikacji w p5js-->
-    <script src="js/app_p5.js"></script>
+        const cw = canvas.width;
+        const ch = canvas.height;
 
-  </body>
+        const ballSize = 20; // wielkość piłki
+        let ballX = cw / 2 - ballSize/2  //skruty do function ball
+        let ballY = ch / 2 - ballSize/2  //skruty ---------------
+
+        const paddelHeight = 100; ///wymiaty paletek
+        const paddelWidth = 20;
+
+        const  playerX = 70; //pozycja rakiery
+        const aiX = 910;
+
+
+        let playerY = 200; // pozycja rakiety
+        let  aiY = 200;
+
+        function player() {
+          ctx.fillStyle = 'green'; //kolor paletek
+          ctx.fillRect(playerX, playerY, paddelWidth, paddelHeight);
+        }
+
+        function ball() {
+          ctx.fillStyle = 'yellow';
+          ctx.fillRect(ballX, ballY, ballSize, ballSize);
+        }
+
+        function table() {
+             //pole do gry
+            ctx.fillStyle = "blue"; //kolor tła
+            ctx.fillRect(0, 0, cw, ch);
+        }
+
+        table()
+        ball()
+        palyer()
+
+
+    </script>
+</body>
 </html>
