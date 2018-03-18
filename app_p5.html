@@ -1,72 +1,115 @@
-  <!DOCTYPE html>
-<html  lange="en">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8"
-    <title>PONG</title>
-    <style>
-        body {
-             margin: 0;
-             padding: 0;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-             height: 100vh;
-             background-color: darkgray;
-        }
-        canvas {
-          border: 3px solid #fff
-          }
-    </style>
+  <meta charset="UTF-8">
+  <title>Tenis Gra w JavaScript</title>
+  <style>
+    body {
+
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: darkgray;
+    }
+
+    canvas {
+      /*obramowania canvas*/
+      border: 3px solid #fff;
+    }
+  </style>
 </head>
+
 <body>
 
-    <canvas></canvas>
+  <canvas></canvas>
 
-    <script>
-        const canvas = document.querySelector('canvas');
-        const ctx = canvas.getContext('2d');
+  <script>
 
-        canvas.width = 1000;
-        canvas.height = 500;
+    const canvas = document.querySelector('canvas');
+    /*nowe właściwości i metody do których odwałamy sie za pomocą obiektu ctx*/
+    const ctx = canvas.getContext('2d');
 
-        const cw = canvas.width;
-        const ch = canvas.height;
+    /*canvas wysokość i szerokosć*/
+    canvas.width = 1000;
+    canvas.height = 500;
 
-        const ballSize = 20; // wielkość piłki
-        let ballX = cw / 2 - ballSize/2  //skruty do function ball
-        let ballY = ch / 2 - ballSize/2  //skruty ---------------
+    /*wysokosć i szerokość przypisujemy do zmiennych*/
+    const cw = canvas.width;
+    const ch = canvas.height;
 
-        const paddelHeight = 100; ///wymiaty paletek
-        const paddelWidth = 20;
+    const ballSize = 20; //wielkosć naszej
+    let ballX = cw / 2 - ballSize / 2
+    let ballY = ch / 2 - ballSize / 2
 
-        const  playerX = 70; //pozycja rakiery
-        const aiX = 910;
+    const paddelHeight = 100; //wysokość rakietki gracza
+    const paddelWidth = 20; //--------------------------
 
+    const playerX = 70; //pozycja rakietki gracza na osi x
+    const aiX = 910; //pozycja rakietki gracza na osi x
 
-        let playerY = 200; // pozycja rakiety
-        let  aiY = 200;
+    let playerY = 200;
+    let aiY = 200;
 
-        function player() {
-          ctx.fillStyle = 'green'; //kolor paletek
-          ctx.fillRect(playerX, playerY, paddelWidth, paddelHeight);
-        }
+    const lineWidth = 6; //szerokosć rakietek
+    const lineHeight = 16; //wysokosć rakietek
 
-        function ball() {
-          ctx.fillStyle = 'yellow';
-          ctx.fillRect(ballX, ballY, ballSize, ballSize);
-        }
-
-        function table() {
-             //pole do gry
-            ctx.fillStyle = "blue"; //kolor tła
-            ctx.fillRect(0, 0, cw, ch);
-        }
-
-        table()
-        ball()
-        palyer()
+    let ballSpeedX = -1;
+    let ballSpeedY = 1;
 
 
-    </script>
+    function player() {
+      ctx.fillStyle = 'yellow'; //kolor paletki 1
+      ctx.fillRect(playerX, playerY, paddelWidth, paddelHeight);
+    }
+
+
+    function ai() {
+      ctx.fillStyle = 'red'; // kolor paletki 2
+      ctx.fillRect(aiX, aiY, paddelWidth, paddelHeight);
+    }
+
+    function ball() {
+
+      ctx.fillStyle = 'blue'; // kolor piłki
+      ctx.fillRect(ballX, ballY, ballSize, ballSize);
+
+
+      ballX += ballSpeedX;
+      ballY += ballSpeedY;
+    }
+
+
+
+    function table() {
+
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, cw, ch);
+
+
+      /*
+      Rysuje środek boiska
+      */
+      for (let linePosition = 20; linePosition < ch; linePosition += 30) {
+        ctx.fillStyle = "purple"
+        ctx.fillRect(cw / 2 - lineWidth / 2, linePosition, lineWidth, lineHeight)
+      }
+
+    }
+
+
+    function game() {
+      table()
+      ball()
+      player()
+      ai()
+    }
+
+    //Funkcję, którą ma wywołać oraz czas co jaki ma nastąpić wywołanie.
+    setInterval(game, 4000 / 60)
+  </script>
 </body>
+
 </html>
