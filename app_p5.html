@@ -40,23 +40,21 @@
     /*nowe właściwości i metody do których odwałamy sie za pomocą obiektu ctx*/
     const ctx = canvas.getContext('2d');
 
-    /*canvas wysokość i szerokosć*/
     canvas.width = 1000;
     canvas.height = 500;
 
-    /*wysokosć i szerokość przypisujemy do zmiennych*/
     const cw = canvas.width;
     const ch = canvas.height;
 
-    const ballSize = 20; //wielkosć naszej
+    const ballSize = 20; //wielkosć piłki
     let ballX = cw / 2 - ballSize / 2
     let ballY = ch / 2 - ballSize / 2
 
     const paddelHeight = 100; //wysokość rakietki gracza
     const paddelWidth = 20; //--------------------------
 
-    const playerX = 70; //pozycja rakietki gracza na osi x
-    const aiX = 910; //pozycja rakietki gracza na osi x
+    const playerX = 70;
+    const aiX = 910;
 
     let playerY = 200;
     let aiY = 200;
@@ -64,8 +62,8 @@
     const lineWidth = 6; //szerokosć rakietek
     const lineHeight = 16; //wysokosć rakietek
 
-    let ballSpeedX = 7;
-    let ballSpeedY = 7;
+    let ballSpeedX = 9; //szybkość piłki
+    let ballSpeedY = 9;
 
 
     function player() {
@@ -90,10 +88,12 @@
 
       if (ballY <= 0 || ballY + ballSize >= ch ) {
         ballSpeedY = -ballSpeedY;
+        speedUp();
       }
 
       if (ballX <=0 || ballX + ballSize >= cw) {
           ballSpeedX = -ballSpeedX;
+          speedUp();
         }
     }
 
@@ -104,10 +104,6 @@
       ctx.fillStyle = 'green';
       ctx.fillRect(0, 0, cw, ch);
 
-
-      /*
-      Rysuje środek boiska
-      */
       for (let linePosition = 20; linePosition < ch; linePosition += 30) {
         ctx.fillStyle = "purple"
         ctx.fillRect(cw / 2 - lineWidth / 2, linePosition, lineWidth, lineHeight)
@@ -115,12 +111,50 @@
 
     }
 
+    topCanvas = canvas.offsetTop;
+    console.log(topCanvas);
+
+     function playerPosition(event) {
+       playerY = event.clientY - topCanvas - paddelHeight / 2;
+       if (playerY >= ch - paddelHeight) {
+         playerY = ch - paddelHeight
+       }
+       if (playerY <= 0) {
+         playerY = 0;
+       }
+       //aiY = playerY;
+     }
+
+     function speedUp() {            /// przypieszenie piłki
+       //console.log(ballSpeedX + "," + ballSpeedY);
+       if (ballSpeedX > 0 && ballSpeedX < 16){
+            ballSpeedX += .4;
+       }
+        else  if (ballSpeedX> 0 && ballSpeedX > -16) {
+             ballSpeedX -= 4;
+        }
+        if (ballSpeedY > 0 && ballSpeedY < 16){
+             ballSpeedX += .3;
+        }
+         else  if (ballSpeedY > 0 && ballSpeedY > -16) {
+              ballSpeedY -= .3;
+         }
+     }
+
+     function aiPosition() {     ///sztuczna inteligencja paletki
+
+     }
+
+    canvas.addEventListener("mousemove",
+    playerPosition)
+
 
     function game() {
       table()
       ball()
       player()
       ai()
+      aiPosition()
     }
 
 
