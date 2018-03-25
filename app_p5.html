@@ -143,13 +143,44 @@
          }
      }
 
-     function aiPosition() {     ///sztuczna inteligencja paletki
+     function aiPosition() { //Sztuczna inteligencja paletki
+      const middlePaddel= aiY + paddelHeight / 2 ;
+      const middleBall = ballY + ballSize / 2;
+      
+      if (ballX > 500) {
+        
+        if (middlePaddel - middleBall > 200) {
+ 
+          aiY -= 24;
+          
+        } else if (middlePaddel - middleBall > 50) {
+          aiY -= 10;
+        }
+        else if (middlePaddel - middleBall < -200) {
+          aiY += 24;
+        } else if (middlePaddel - middleBall < -50) {
+          aiY += 10;
+        }
+       }
+       
+      if (ballX <= 500 && ballX > 100) {
+        if (middlePaddel - middleBall > 100) {
+          aiY -= 3;
+        } 
+ if (middlePaddel - middleBall < -100) {
+          aiY += 3;
+        }
+      }
+      if (aiY >= ch - paddelHeight) {
+        aiY = ch - paddelHeight
+      }
+	
+      if (aiY <= 0) {
+        aiY = 0;
+      }
+    }
 
-     }
-
-    canvas.addEventListener("mousemove",
-    playerPosition)
-
+    canvas.addEventListener("mousemove", playerPosition)
 
     function game() {
       table()
@@ -159,8 +190,7 @@
       aiPosition()
     }
 
-
-    setInterval(game, 4000 / 60)
+    setInterval(game, 1000 / 60)
   </script>
 </body>
 
