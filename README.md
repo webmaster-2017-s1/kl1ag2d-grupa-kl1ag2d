@@ -1,13 +1,5 @@
-Uzupełnij poniższy dokument zastępując tekst "[wpisz nazwę]" nazwą
-twojego (waszego) projektu JavaScript.
- 
-Przeczytaj [instrukcję realizacji zadania](doc/zadanie.md).
-
-Po uzupełnieniu dokumentu usuń powyższe oraz niniejszy akapit
-i zatwierdź zmiany używając komentarza "Aktualizacja README.md".
-
-# [Wpisz nazwę projektu]
-Implementacja gry [wpisz nazwę] w JavaScript
+#
+Implementacja gry [Pong] w JavaScript
 
 ## Uruchomienie
-[Tu umieść opis kroków pozwalających na uruchomienie projektu]
+[By uruchomić grę należy pobrać plik zip. Nastepnie trzeba go gdzieś rozpakować. Kolejnym krokiem jest otworzenie pliku index.html, z którego łatwo można przedostać się do wybranej wersji (JQ-ze sztuczną inteligencją, p5.js-z innym człowiekiem poprzez jeden komputer)]
